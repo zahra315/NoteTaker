@@ -3,25 +3,37 @@ const fs = require('fs');
 const data = JSON.parse(fs.readFileSync('./db/db.json', 'utf-8'));
 const app = express();
 const path = require('path');
-const PORT = 3000;
+const PORT = process.env.PORT || 8000;
 
-// let notStorage = [];
+// let notes = [];
+
+
+// Set up body parsing, static, and route middleware
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
+app.use(express.static(path.join(__dirname, "Develop/public")));
+
+
+// api call response
+// app.get("/", function(req, res) {
+//     res.sendFile(path.join(__dirname, "public/index.html"));
+// }); 
 
 app.get('/notes', (req, res)=>{
-    res.sendFile(path.join(__dirname, '/../public/notes.html'));
+    res.sendFile(path.join(__dirname, 'public/notes.html'));
 });
 
 app.get('*', (req, res)=>{
-    res.sendFile(path.join(__dirname, '/../public/index.html'));
+    res.sendFile(path.join(__dirname, 'public/index.html'));
 });
 
 app.get('/api/notes', (req, res)=>{
-    res.json(data);
+    return res.sendFile(path.json(__dirname, 'db/db.json'));
 });
 
 
 app.post('/api/notes', (req, res)=>{
-    
+    notes.push(req.body);
 })
 
  
