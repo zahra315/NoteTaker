@@ -8,7 +8,7 @@ let notesData = [];
 // Set up body parsing, static, and route middleware
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use(express.static(path.join(__dirname, "public")));
+app.use(express.static("public"));
 
 app.get("/api/notes", function (err, res) {
   notesData = fs.readFileSync("db/db.json", "utf8");
@@ -52,7 +52,7 @@ app.delete("/api/notes/:id", function (req, res) {
 
 // api call response
 app.get("/", (req, res) => {
-  res.sendFile(path.join(__dirname, "./public/index.html"));
+  res.sendFile(path.join(__dirname, "public/index.html"));
 });
 
 app.get("/notes", function (req, res) {
@@ -63,9 +63,9 @@ app.get("*", function (req, res) {
   res.sendFile(path.join(__dirname, "public/index.html"));
 });
 
-app.get("/api/notes", function (req, res) {
-  return res.sendFile(path.json(__dirname, "db/db.json"));
-});
+// app.get("/api/notes", function (req, res) {
+//   return res.sendFile(path.json(__dirname, "db/db.json"));
+// });
 
 app.listen(PORT, function () {
   console.log("SERVER IS LISTENING: " + PORT);
