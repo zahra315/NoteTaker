@@ -5,9 +5,6 @@
 ## Deployed app
 -   [Heroku App](https://desolate-fortress-36923.herokuapp.com/ "Heroku App")
 
-## Contents
-- [Description](#description)
-- [Technologies Used](#Technologies Used)
 
 ## Description:
 An application that can be used to write, save, and delete notes. This application will use an express backend and save and retrieve note data from a JSON file.
