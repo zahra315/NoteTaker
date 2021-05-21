@@ -3,7 +3,7 @@
 [![license](https://img.shields.io/badge/license-MIT-blue)]
 
 ## Deployed app
--   [Heroku App](https://desolate-fortress-36923.herokuapp.com/ "Heroku App")
+-   [Heroku App](https://desolate-fortress-36923.herokuapp.com/)
 
 
 ## Description:
