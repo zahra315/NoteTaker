@@ -10,21 +10,21 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static("public"));
 
-app.get("/api/notes", function (err, res) {
+app.get("/api/notes", (err, res) => {
   notesData = fs.readFileSync("db/db.json", "utf8");
   notesData = JSON.parse(notesData);
   res.json(notesData);
 });
 
 // writes the new note to the json file
-app.post("/api/notes", function (req, res) {
+app.post("/api/notes", (req, res) => {
   notesData = fs.readFileSync("./db/db.json", "utf8");
   notesData = JSON.parse(notesData);
   req.body.id = notesData.length;
   notesData.push(req.body);
   notesData = JSON.stringify(notesData);
   // writes the new note to file
-  fs.writeFile("./db/db.json", notesData, "utf8", function (err) {
+  fs.writeFile("./db/db.json", notesData, "utf8", (err) => {
     if (err) throw err;
   });
 
@@ -33,16 +33,16 @@ app.post("/api/notes", function (req, res) {
 
 // Delete a note
 
-app.delete("/api/notes/:id", function (req, res) {
+app.delete("/api/notes/:id", (req, res) => {
   notesData = fs.readFileSync("./db/db.json", "utf8");
   notesData = JSON.parse(notesData);
   // delete the old note from the array on note objects
-  notesData = notesData.filter(function (note) {
+  notesData = notesData.filter((note) => {
     return note.id != req.params.id;
   });
   notesData = JSON.stringify(notesData);
   // write the new notes to the file
-  fs.writeFile("./db/db.json", notesData, "utf8", function (err) {
+  fs.writeFile("./db/db.json", notesData, "utf8", (err) => {
     if (err) throw err;
   });
 
@@ -55,18 +55,14 @@ app.get("/", (req, res) => {
   res.sendFile(path.join(__dirname, "public/index.html"));
 });
 
-app.get("/notes", function (req, res) {
+app.get("/notes", (req, res) => {
   res.sendFile(path.join(__dirname, "public/notes.html"));
 });
 
-app.get("*", function (req, res) {
+app.get("*", (req, res) => {
   res.sendFile(path.join(__dirname, "public/index.html"));
 });
 
-// app.get("/api/notes", function (req, res) {
-//   return res.sendFile(path.json(__dirname, "db/db.json"));
-// });
-
-app.listen(PORT, function () {
+app.listen(PORT, () => {
   console.log("SERVER IS LISTENING: " + PORT);
 });
